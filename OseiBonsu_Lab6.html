@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<title>CIS 223 Chapter 6 Program</title>
+<script>
+var containerPizza = 0, containerTopping = 0, containerMode = 0;
+function getName(){
+var userName = document.getElementById('user').value;
+document.getElementById('fname').innerHTML = userName+ "\'s";
+}
+
+function selectRadio(){
+
+var selectedPizza = document.getElementsByName("tpizza");
+for(var i = 0; i < selectedPizza.length; i++){
+if (selectedPizza[i].checked){
+var selectedPizzaPrice = selectedPizza[i].value;
+var selectedPizzaSize = selectedPizza[i].id;
+
+}
+}
+var pizzaTotal =  parseFloat(selectedPizzaPrice);
+document.getElementById("sizeChosen").innerHTML = selectedPizzaSize;
+document.getElementById("sizePrice").innerHTML = "$"+selectedPizzaPrice;
+containerPizza = pizzaTotal;
+
+var total = containerMode+containerTopping+containerPizza;
+
+document.getElementById("grossAmount").innerHTML = total;
+
+
+
+}
+
+
+
+
+function selectTpp(){
+var selected_Topping = "";
+var toppingCounter = 0;
+var selectedToppings = document.getElementsByName("tppn");
+for(var i = 0; i < selectedToppings.length; i++){
+if (selectedToppings[i].checked){
+var selected_Topping = selected_Topping + selectedToppings[i].value + "<br/>";
+ toppingCounter = toppingCounter + 1;
+}
+}
+var totalToppingPrice = toppingCounter * 1.5;
+document.getElementById("toppingsChosen").innerHTML = selected_Topping;
+document.getElementById("toppingsPrices").innerHTML = "$"+totalToppingPrice;
+containerTopping = totalToppingPrice;
+
+var total = containerMode+containerTopping+containerPizza;
+
+document.getElementById("grossAmount").innerHTML = total;
+ 
+}
+
+function selectMode(){
+var selectedMode = document.getElementById("mode").value;
+
+if (selectedMode == "Delivery"){
+var modePrice = "2";
+containerMode =  2;
+} else {
+var modePrice = "0";
+containerMode = 0;
+}
+
+document.getElementById("ModeChosen").innerHTML = selectedMode;
+document.getElementById("ModePrice").innerHTML = "$"+modePrice;
+
+var total = containerMode+containerTopping+containerPizza;
+
+document.getElementById("grossAmount").innerHTML = total;
+}
+
+function theEnd(event){
+var response = window.confirm("Would you like to submit your order?");
+if (!response){
+document.getElementById("canceled").innerHTML = "Your order has been cancelled- please resubmit your order.";
+} else {
+window.location.href = "OseiBonsu_Lab6Page2.html";
+}
+
+
+}
+
+
+
+ 
+
+
+</script>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: left;
+  padding-left: 4px;
+  padding-top:4px;
+  padding-bottom:4px;
+</style>
+
+</head>
+
+<body>
+<form name="myform" action = "" >
+<p>Name: <input type= "text" name="user" id="user" oninput="getName();"></p>
+<br/>
+<p>Please choose your size of pizza:</p>
+<input type="radio" name="tpizza" id="Small" value="8" onclick="selectRadio()"/>Small $8.00<br/>
+<input type="radio" name="tpizza" id="Medium" value="10" onclick="selectRadio()"/>Medium $10.00<br/>
+<input type="radio" name="tpizza" id="Large" value="12" onclick="selectRadio()"/>Large $12.00<br/>
+<input type="radio" name="tpizza" id="Extra Large" value="14" onclick="selectRadio()"/>Extra Large $14.00<br/>
+<br/>
+<p>Please choose your toppings ($1.50 each):</p>
+<input type="checkbox" name="tppn" id="pepperoni" value="Pepperoni" onclick="selectTpp()" /> Pepperoni<br/>
+<input type="checkbox" name="tppn" id="sausge" value="Sausage" onclick="selectTpp()" /> Sausage<br/>
+<input type="checkbox" name="tppn" id="bacon" value="Bacon" onclick="selectTpp()"/>Bacon<br/>
+<input type="checkbox" name="tppn" id="onions" value="Onions" onclick="selectTpp()"/>Onions<br/>
+<input type="checkbox" name="tppn" id="spinach" value="Spinach" onclick="selectTpp()"/>Spinach<br/>
+<br/>
+<select name="mode" id="mode"  oninput="selectMode()">
+<option value="Pick-up">Pick-up</option>
+<option value="Delivery">Delivery</option>
+</select>
+<br/>
+<br/>
+
+
+
+
+
+</form>
+<button type="submit" value="Confirm Your Order" onclick="theEnd();">Confirm Your Order </button>
+
+<div>
+<h1><span id="fname">Your</span> Order</h1>
+<table style="width:100%">
+<tr>
+<th>Description</th>
+<th>Option</th>
+<th>Price</th>
+</tr>
+
+<tr>
+<td>Size</td>
+<td ><span id="sizeChosen"></span></td>
+<td><span id="sizePrice"></span></td>
+</tr>
+
+<tr>
+<td>Toppings</td>
+<td><span id="toppingsChosen"></span></td>
+<td><span id="toppingsPrices"></span></td>
+</tr>
+
+<tr>
+<td>Pick-Up/Delivery</td>
+<td><span id="ModeChosen"></span></td>
+<td><span id="ModePrice"></span></td>
+</tr>
+
+</table>
+<p><b>Your Current Total is $<span id="grossAmount"></span></b></p>
+<p><b><span id="canceled"></span></b></p>
+
+
+
+</div>
+
+</body>
+
+
+
+
+
+
+
+
+
+</html>
